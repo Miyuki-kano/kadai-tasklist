@@ -7,10 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "messages")
+@NamedQueries({
+    @NamedQuery(
+        name = "getAllTask", //DTOクラス(srcの中のmodelsの中のもの)と同じ名前にする。すなわちこのクラスと同じ名前にする
+        query = "SELECT m FROM Task AS m ORDER BY m.id DESC"//テーブルと結びついてるDTOクラス。すなわちこのクラス
+    )
+})
+@Table(name = "tasks")
 public class Task {
     @Id
     @Column(name = "id")
